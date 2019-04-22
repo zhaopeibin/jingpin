@@ -13,6 +13,9 @@ import { Field } from 'vant';
 import { NavBar } from 'vant';
 import { Sku } from 'vant';
 
+import { Popup } from 'vant';
+
+Vue.use(Popup);
 Vue.use(Sku);
 import { Row, Col, Icon, Cell, CellGroup } from 'vant'
 import axios from 'axios'
@@ -39,6 +42,7 @@ Vue.use(AddressList);
 Vue.use(Tab).use(Tabs);
 // Vue.use(mui)
 Vue.use(Toast);
+
 Vue.use(HttpTool)
 Vue.use(NavBar);
 Vue.use(qs);

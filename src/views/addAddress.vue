@@ -42,13 +42,13 @@
             </div>
           </div>
         </div>
-        <div class="van-cell van-field">
-          <div class="van-cell__title van-field__label" @click="popList()">
+        <div class="van-cell van-field"  @click="poplist()" >
+          <div class="van-cell__title van-field__label">
             <span>地区</span>
             
           </div>
           
-          <!-- <div class="van-cell__value">
+          <div class="van-cell__value" >
             <div class="van-field__body">
               <input
                 type="text"
@@ -57,7 +57,7 @@
                 class="van-field__control"
               >
             </div>
-          </div>-->
+          </div>
         </div>
         <div class="van-cell van-address-edit-detail">
           <div class="van-cell__value van-cell__value--alone">
@@ -108,23 +108,30 @@
           </button>
         </div>
       </div>
+      <van-popup v-model="show" position="bottom">
+          <van-area :area-list="areaList" />
+      </van-popup>
     </section>
-    <van-popup v-model="show" position="top" :overlay="false">内容11111111111111111111111</van-popup>
+    
   </div>
 </template>
 <script>
+import city from '../components/city.js'
 export default {
   data() {
     return {
-      areaList,
+    show:false,    
+      areaList:city,
       searchResult: [],
-      show: false
+      
     };
   },
-
+    created(){
+    
+    },
   methods: {
-       popList() {
-      // alert('111')
+     poplist() {
+    //   alert('111')
       this.show = true;
     },
     onSave() {
