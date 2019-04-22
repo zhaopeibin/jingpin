@@ -60,7 +60,7 @@ export default {
   created() {
     // if(sessionStorage.token) {
     //     Toast.success('您已经登录过了')
-    //             this.$router.push('/')
+    //       this.$router.push('/')
     // }
     this.loadToken();
   },
@@ -141,7 +141,7 @@ export default {
          if(res.data.code == 200){
            Toast.success('登录成功')
             sessionStorage.setItem("id", memberId);
-             this.$router.push({name: 'home'})
+             this.$router.push({name: 'home'});
          }
         //  var authCode = res.data.data
         //  console.log(authCode)

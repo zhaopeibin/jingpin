@@ -6,13 +6,18 @@
   
   left-arrow
   @click-left="onClickLeft"
-  @click-right="onClickRight"
+ 
 />
     <div class="nickName">
+       <!-- <div class="list"  >
+     <div class="nickpic"> <img src="../assets/images/icon/12344.jpg" alt=""></div>
+     <div class="nick">指动小优</div>
+     </div> -->
       <div class="list">
-     <div class="nickpic"> <img src="../../src/assets/images/icon/12344.jpg" alt=""></div>
-     <div class="nick">大班阿毛</div>
+     <div class="nickpic"> <img :src="this.icon" alt=""></div>
+     <div class="nick">{{this.username}}</div>
      </div>
+     
     </div>
     <div class="minbox">
      <ul>
@@ -87,7 +92,9 @@ export default {
   },
   data () {
     return {
-      
+      list:[],
+      username:'',
+      icon:''
     }
   },
    beforeCreate(){
@@ -96,12 +103,23 @@ export default {
                 this.$router.push('login')
             }
         },
+    created(){
+        this.handleUser()
+        },
   methods:{
     onClickLeft() {
       // this.$router.push({name:'home'});
       // 返回上一页面
        this.$router.go(-1)
     },
+  async  handleUser() {
+        const id = sessionStorage.getItem('id')
+        const res = await this.$http.get("/sso/getUser?"+"UserId="+id);
+        this.list = res.data
+        this.username = this.list.username
+        this.icon = this.list.icon
+        console.log(this.list)
+    }
   }
 }
 </script>

@@ -15,6 +15,7 @@ import userset from '../views/userset.vue'
 import blance from '../views/blance.vue'
 import orderDeta  from '../views/orderDeta.vue'
 import express  from '../views/express.vue'
+import addAddress from '../views/addAddress.vue'
 
 
 Vue.use(Router)
@@ -97,6 +98,11 @@ export default new Router({
       path:'/express',
       name:'express',
       component:express
+    },
+    {
+      path:'/addAddress',
+      name:'addAddress',
+      component:addAddress
     }
     
     
