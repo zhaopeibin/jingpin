@@ -1,13 +1,6 @@
 <template>
   <div class="address">
-    <van-nav-bar
-      title="标题"
-      left-text="返回"
-      right-text="按钮"
-      left-arrow
-      @click-left="onClickLeft"
-      @click-right="onClickRight"
-    />
+    <van-nav-bar title="标题" left-text="返回" right-text="按钮" left-arrow/>
     <!-- <van-address-edit
   :area-list="areaList"
   show-postal
@@ -20,7 +13,6 @@
   @change-detail="onChangeDetail"
     />-->
     <section class="van-doc-demo-block">
-    
       <div class="van-address-edit">
         <div class="van-cell van-field">
           <div class="van-cell__title van-field__label">
@@ -42,20 +34,25 @@
             </div>
           </div>
         </div>
-        <div class="van-cell van-field"  @click="poplist()" >
+        <div class="van-cell van-field" @click="poplist()">
           <div class="van-cell__title van-field__label">
             <span>地区</span>
-            
           </div>
-          
-          <div class="van-cell__value" >
+
+          <div class="van-cell__value">
             <div class="van-field__body">
-              <input
+              <!-- <span v-for="item in this.cityList" :key="item.id">{{item.name}}</span> -->
+              <span>{{this.province}}</span>
+              <span>{{this.city}}</span>
+              <span>{{this.region}}</span>
+
+              <!-- {{}}{{}}{{}} -->
+              <!-- <input
                 type="text"
                 placeholder="选择省 / 市 / 区"
                 readonly="readonly"
                 class="van-field__control"
-              >
+              >-->
             </div>
           </div>
         </div>
@@ -73,6 +70,7 @@
                     placeholder="街道门牌、楼层房间号等信息"
                     class="van-field__control"
                     style="height: 24px;"
+                    v-model="detatilAdd"
                   ></textarea>
                 </div>
               </div>
@@ -85,7 +83,7 @@
           </div>
           <div class="van-cell__value">
             <div class="van-field__body">
-              <input type="tel" maxlength="6" placeholder="邮政编码" class="van-field__control">
+              <input type="tel" maxlength="6" placeholder="邮政编码" class="van-field__control" v-model="postNum">
             </div>
           </div>
         </div>
@@ -100,7 +98,7 @@
           </div>
         </div>
         <div class="van-address-edit__buttons" style>
-          <button class="van-button van-button--danger van-button--normal van-button--block">
+          <button class="van-button van-button--danger van-button--normal van-button--block" @click="addAddress()">
             <span class="van-button__text">保存</span>
           </button>
           <button class="van-button van-button--default van-button--normal van-button--block">
@@ -109,30 +107,66 @@
         </div>
       </div>
       <van-popup v-model="show" position="bottom">
-          <van-area :area-list="areaList" />
+        <van-area :area-list="areaList" value="370100" @confirm="OnConfirm"/>
       </van-popup>
     </section>
-    
   </div>
 </template>
 <script>
-import city from '../components/city.js'
+import city from "../components/city.js";
 export default {
   data() {
     return {
-    show:false,    
-      areaList:city,
+      show: false,
+      areaList: city,
       searchResult: [],
-      
+      username: "",
+      tel: "",
+      cityList: [],
+      province: "",
+      city: "",
+      region: "",
+      detatilAdd:'',
+      postNum:''
     };
   },
-    created(){
-    
-    },
+  crested() {
+    this.addAddress();
+  },
+
   methods: {
-     poplist() {
-    //   alert('111')
+    poplist() {
+      //   alert('111')
       this.show = true;
+    },
+    OnConfirm: function(res) {
+      var res = res;
+      this.cityList = res;
+      this.province = this.cityList[0].name;
+      this.city = this.cityList[1].name;
+      this.region = this.cityList[2].name;
+      // console.log(this.cityList)
+      // console.log(this.cityList[1].name)
+      // for (let i = 0; i < this.cityList.length; i++) {
+      //   console.log(this.cityList[i])
+
+      // }
+    },
+     async addAddress() {
+      var address = {
+        city: this.city,
+        defaultStatus: 0,
+        detailAddress: this.detatilAdd,
+        id: 0,
+        memberId: 14,
+        name: this.username,
+        phoneNumber: this.tel,
+        postCode: this.postNum,
+        province: this.province,
+        region: this.region
+      };
+      const res = await this.$http.post("/member/address/add" ,address);
+      console.log(res)
     },
     onSave() {
       Toast("save");
@@ -140,6 +174,7 @@ export default {
     onDelete() {
       Toast("delete");
     },
+    confirm() {},
     onChangeDetail(val) {
       if (val) {
         this.searchResult = [
@@ -151,8 +186,7 @@ export default {
       } else {
         this.searchResult = [];
       }
-    },
-   
+    }
   }
 };
 </script>

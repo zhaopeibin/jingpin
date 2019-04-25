@@ -14,6 +14,11 @@ import { NavBar } from 'vant';
 import { Sku } from 'vant';
 
 import { Popup } from 'vant';
+import { RadioGroup, Radio } from 'vant';
+
+Vue.use(RadioGroup);
+Vue.use(Radio);
+
 
 Vue.use(Popup);
 Vue.use(Sku);

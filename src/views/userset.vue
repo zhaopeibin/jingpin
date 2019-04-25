@@ -35,7 +35,7 @@
 						</ul>
                         <ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
-								<a href="#account" class="mui-navigate-right">修改个人资料</a>
+								<a href="#edit" class="mui-navigate-right">修改个人资料</a>
 							</li>
 						</ul>
 						<ul class="mui-table-view mui-table-view-chevron">

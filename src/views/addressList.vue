@@ -6,22 +6,22 @@
      
       <div class="van-address-list">
         <div class="van-radio-group">
-          <div class="van-cell van-cell--clickable van-address-item">
-            <div class="van-cell__value van-cell__value--alone van-address-item__value">
-              <div class="van-radio">
+          <div class="van-cell van-cell--clickable van-address-item" v-for="item in list" :key="item.id">
+            <div class="van-cell__value van-cell__value--alone van-address-item__value" >
+              <div class="van-radio" >
                 <div class="van-radio__icon van-radio__icon--round van-radio__icon--checked">
                   <i class="van-icon van-icon-success">
                     <!---->
                   </i>
                 </div>
-                <span class="van-radio__label" v-for="item in list" :key="item.id">
+                <span class="van-radio__label" >
                   <div class="van-address-item__name">{{item.name}} &nbsp &nbsp<span>{{item.phoneNumber}}</span></div>
                   <div class="van-address-item__address">{{item.province}}{{item.city}}{{item.region}}{{item.detailAddress}}</div>
                 </span>
               </div>
             </div>
             <i class="van-icon van-icon-edit van-address-item__edit" @click="onEdit()">
-              <!---->
+              
             </i>
           </div>
          
@@ -60,7 +60,7 @@ export default {
     },
     async handleAddress() {
       const res = await this.$http.get("/member/address/" + 14);
-      this.list.push(res.data.data)
+      this.list = res.data.data
       console.log(this.list);
     }
   }

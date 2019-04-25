@@ -16,6 +16,9 @@ import blance from '../views/blance.vue'
 import orderDeta  from '../views/orderDeta.vue'
 import express  from '../views/express.vue'
 import addAddress from '../views/addAddress.vue'
+import edituserinfo from '../views/edituserinfo.vue'
+import edit from '../views/edit.vue'
+import userinfo from '../views/userinfo.vue'
 
 
 Vue.use(Router)
@@ -103,6 +106,21 @@ export default new Router({
       path:'/addAddress',
       name:'addAddress',
       component:addAddress
+    },
+    {
+      path:'/edit',
+      name:'edit',
+      component:edit
+    },
+    {
+      path:'/edituserinfo',
+      name:'edituserinfo',
+      component:edituserinfo
+    },
+    {
+      path:'/userinfo',
+      name:'userinfo',
+      component:userinfo
     }
     
     
